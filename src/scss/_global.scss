@@ -1,0 +1,51 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-Regular.ttf);
+  }
+
+html, body, main {
+	font-family: Monospace;
+	position: relative;
+    width: 100%;
+    margin: 0;
+    font-size: 1.05rem;
+	font-weight: 300;
+	color: $black;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 3rem auto -1px 12rem;
+    grid-template-areas:
+        "header header header header"
+        "main main main main"
+        ". . . ."
+        "footer footer footer footer";
+    align-content: space-between;
+    background-color: $brand-gray-200;
+    background-color: #F5F5F5;
+}
+
+main {
+    grid-area: main;
+
+    .main-header {
+        height: 2rem;
+        margin: 0;
+        font-size: 1.5rem;
+        padding: 0.25rem;
+        text-align: center;
+    }
+}
+
+a {
+    color: $blue-dark;
+    font-weight: 300;
+	transition: all 0.3s;
+}

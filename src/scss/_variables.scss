@@ -1,0 +1,63 @@
+$breakpoints: (
+    'xs': 0,
+    'sm': 576px,
+    'md': 768px,
+    'lg': 992px,
+    'xl': 1200px
+);
+
+$radius-element: 4px;
+$radius-button: 4px;
+$radius-input: 3px;
+$radius-input-radio: 50%;
+$radius-progress: 2px;
+
+// main colors
+$blue: #007bff;
+$blue-dark: #005fc5;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #6c757d;
+$gray-light: #d3d3d3;
+$gray-dark: #343a40;
+$black: #000000;
+$white: #ffffff;
+
+// $brand: #2e2e67;
+
+$brand: #013245;
+$brand-secondary: #073f54;
+$brand-third: #82a5b9;
+$brand-forth: #f4f7ff;
+$brand-flair: #195dbd;
+
+$brand-gray-500: #d6d8da;
+$brand-gray-400: #E0E2E5;
+$brand-gray-300: #ebebeb;
+$brand-gray-200: #eff0f1;
+$brand-gray-100: #f9f9f9;
+
+$brand-text-main: #c3c3c3;
+
+$brand-red: #88001b;
+$brand-green: #90BB54;
+$brand-yellow: #F7CC65;
+$brand-orange: #FF9200;
+
+$brand-bg: #fafafa;
+
+$brand-palette-test: (
+    'main': #27313F,
+    'secondary': #72717E,
+    'bg': #F2E4B1,
+    'bg-dark': #ACA299,
+    'accent': #EA7953
+);

@@ -1,0 +1,117 @@
+label,
+legend {
+    font-family: sans-serif, monospace;
+    display: block;
+    width: 100%;
+    margin: 12px 0 1px 2px;
+    font-size: .85rem;
+    color: #616161;
+    user-select: none;
+    border-radius: $radius-input;
+    transition: linear 0.1s box-shadow;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="time"],
+input[type="date"],
+input[type="datetime-local"] {
+    background-color: $white;
+    width: 100%;
+    padding: 4px 0 4px 10px;
+    border: 1px solid #c1c1c1;
+    border-radius: $radius-input;
+    font-size: 1.05rem;
+    transition: linear 0.1s box-shadow;
+    // box-shadow: 1px 1px 1px #e4e4e4 inset;
+    &:focus {
+        outline: none;
+        // box-shadow: 0 0 0 #e4e4e4 inset, 0 0 3px $brand-secondary;
+        // box-shadow: 0 0 0 #e4e4e4 inset, 0 2px 2px $brand-flair;
+        box-shadow: 0 2px 2px $brand-secondary;
+        // box-shadow: 0 2px 2px $brand-flair;
+    }
+}
+textarea {
+    @extend input[type="text"];
+    resize: vertical;
+    min-height: 7rem;
+}
+select {
+    @extend input[type="text"];
+    padding: 0.425rem 0.5rem;
+}
+input[type="file"] {
+    @extend input[type="text"];
+    padding: 0.3rem 0.25rem;
+}
+input[type="color"] {
+    @extend input[type="text"];
+    height: 2.5rem;
+}
+input[type="range"] {
+    width: 100%;
+    padding: 0.35rem 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    width: 0;
+    height: 0;
+    visibility: visible;
+    opacity: 0;
+    &:checked {
+        + label > .label-box-display > svg {
+            opacity: 1;
+        }
+    }
+    &:focus {
+        + label {
+            box-shadow: 0 0 3px $brand;
+        }
+    }
+}
+input[type="checkbox"] {
+    + label > .label-box-display {
+        border-radius: $radius-input;
+    }
+}
+input[type="radio"] {
+    + label > .label-box-display {
+        border-radius: $radius-input-radio;
+    }
+}
+.input-set {
+    margin: 14px 0;
+}
+.input-set-required label::after {
+    content: "*";
+    position: relative;
+    left: 6px;
+    top: 2px;
+    font-size: .9rem;
+    color: #d40000;
+}
+.input-set-singlecheck {
+    margin-top: -20px;
+}
+.label-box-display {
+    background-color: $white;
+    display: inline-block;
+    border: 1px solid $gray;
+    user-select: none;
+    cursor: pointer;
+    svg {
+        opacity: 0;
+        transition: linear 0.05s all;
+    }
+}
+.label-text {
+    position: relative;
+    top: 3px;
+    margin-left: 0.25rem;
+}

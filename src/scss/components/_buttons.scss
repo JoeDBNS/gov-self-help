@@ -1,0 +1,19 @@
+.btn {
+    background-color: $brand-gray-100;
+    padding: 0.5rem 1.75rem;
+    margin: auto;
+    border: 1px solid $brand-third;
+    border-radius: $radius-button;
+    transition: linear 0.1s all, linear 0.025s transform;
+    &:hover {
+        background-color: $brand-third;
+        color: white;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 3px $brand;
+    }
+    &:active {
+        transform: scale(0.94);
+    }
+}

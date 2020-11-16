@@ -1,0 +1,26 @@
+{
+  "name": "gov-self-help",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^4.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeDBNS/gov-self-help.git"
+  },
+  "author": "Joseph Davis <joedbns@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeDBNS/gov-self-help/issues"
+  },
+  "homepage": "https://github.com/JoeDBNS/gov-self-help#readme"
+}

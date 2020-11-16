@@ -1,0 +1,93 @@
+.self-help-module {
+    font-family: "Montserrat", sans-serif;
+    margin: 80px auto 50px auto;
+    padding: 0;
+    box-shadow: 0 0 0 1px #c1c1c1;
+    border-radius: 6px;
+    background-color: white;
+    overflow: hidden;
+
+    .self-help-header {
+        padding: 40px 20px 30px 20px;
+        
+        .self-help-header-text {
+            font-size: 2rem;
+        }
+    }
+
+    .self-help-content {
+        width: 100%;
+
+        .help-topic {
+            overflow: hidden;
+            border-top: 1px solid #c1c1c1;
+            transition: linear .025s all;
+
+            .topic-header {
+                display: flex;
+                justify-content: space-between;
+                padding: 1.75rem 20px;
+                font-weight: 500;
+                cursor: pointer;
+                user-select: none;
+                transition: linear .1s all;
+
+                .header-text {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 1.25rem;
+                    place-self: center;
+                }
+
+                .header-arrow {
+                    margin-left: 16px;
+
+                    svg {
+                        color: #656565;
+                        transition: linear .1s all;
+                    }
+                }
+            }
+
+            .topic-solution {
+                display: none;
+                padding: .5rem 20px 2rem 20px;
+                font-size: 1rem;
+
+                .solution-link {
+                    margin-top: 18px;
+
+                    a {
+                        font-weight: 600;
+
+                        svg {
+                            position: relative;
+                            top: -2px;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .help-topic-expanded {
+            box-shadow: 0 0 0 1px rgba(5, 120, 161, 0.25) inset;
+
+            .topic-header {
+                .header-text {
+                    font-weight: 600;
+                }
+
+                .header-arrow {
+                    svg {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .topic-solution {
+                display: block;
+            }
+        }
+    }
+}
