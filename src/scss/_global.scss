@@ -21,7 +21,7 @@ body {
     min-height: 100%;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 3rem auto -1px 12rem;
+    grid-template-rows: 3rem auto -1px 56px;
     grid-template-areas:
         "header header header header"
         "main main main main"

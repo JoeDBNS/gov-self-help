@@ -24,10 +24,14 @@
         }
     }
 	.footer-bottom {
+        padding-top: 4px;
 		background-color: $brand;
 		.bottom-link {
             text-align: center;
             padding: 0.25rem 0;
+            a {
+                color: white;
+            }
         }
         .bottom-copyright {
             text-align: center;
