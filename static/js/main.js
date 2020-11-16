@@ -2,22 +2,15 @@
 
 // OnLoad Run
 window.addEventListener('load', function() {
-    InitNavigationMenu();
-
     switch (window.location.pathname.replace('/gov-self-help', '').toLowerCase()) {
+        case '/':
         case '/index.html':
             InitSelfHelpMenu();
             break;
 
-        case '/form-long.html':
-            // InitFormProgressMarkers();
-            InitFormProgressDisplay();
-            // InitFormListeners();
-            break;
-
-        case '/form-short.html':
-            InitFormPreSelector();
+        case '/other-help.html':
             InitFormDemoFunc();
+            // InitFormListeners();
             break;
     
         default:
