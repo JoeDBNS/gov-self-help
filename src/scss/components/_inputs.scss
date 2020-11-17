@@ -82,9 +82,11 @@ input[type="radio"] {
         border-radius: $radius-input-radio;
     }
 }
+
 .input-set {
     margin: 14px 0;
 }
+
 .input-set-required label::after {
     content: "*";
     position: relative;
@@ -93,20 +95,41 @@ input[type="radio"] {
     font-size: .9rem;
     color: #d40000;
 }
+
+.input-set-failed {
+    input[type="text"],
+    input[type="search"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    input[type="time"],
+    input[type="date"],
+    input[type="datetime-local"],
+    textarea,
+    select {
+        border-color: red;
+    }
+}
+
 .input-set-singlecheck {
     margin-top: -20px;
 }
+
 .label-box-display {
     background-color: $white;
     display: inline-block;
     border: 1px solid $gray;
     user-select: none;
     cursor: pointer;
+
     svg {
         opacity: 0;
         transition: linear 0.05s all;
     }
 }
+
 .label-text {
     position: relative;
     top: 3px;
