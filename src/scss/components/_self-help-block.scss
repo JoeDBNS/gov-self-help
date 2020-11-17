@@ -79,6 +79,10 @@
                     }
                 }
             }
+
+            &:last-of-type {
+                background-color: rgba(6, 120, 160, 00.14);
+            }
         }
 
         .help-topic-expanded {
