@@ -9,14 +9,23 @@ window.addEventListener('load', function() {
             break;
 
         case '/other-help.html':
-            InitFormDemoFunc();
             // InitFormListeners();
+            // InitFieldListeners();
+            SetupFormFieldMasks();
             break;
-    
+
         default:
             break;
     }
 });
+
+
+function SetupFormFieldMasks() {
+    var mask_phone = IMask(
+        document.getElementById('phone'), {
+            mask: '(000) 000-0000'
+        });
+}
 
 
 function InitSelfHelpMenu() {
@@ -31,41 +40,6 @@ function InitSelfHelpMenu() {
                 selected_topic.parentElement.classList.add('help-topic-expanded');
             }
         });
-    });
-}
-
-
-function InitFormDemoFunc() {
-    var type_selector = document.querySelector('#type');
-    var type_sections = document.querySelectorAll('[data-type-select]');
-    var type_section_birthday = document.querySelector('[data-type-select="birthday"]');
-    var type_section_military = document.querySelector('[data-type-select="military"]');
-    
-    
-    type_selector.addEventListener('change', (event) => {
-        Array.from(type_sections).forEach((section) => {
-            section.setAttribute('hidden', 'true');
-        });
-
-        switch (type_selector.value) {
-            case 'military':
-                type_section_military.removeAttribute('hidden');
-                break;
-
-            case 'birthday':
-                type_section_birthday.removeAttribute('hidden');
-                break;
-        
-            default:
-                break;
-        }
-        document.querySelector('.form-select-module').setAttribute('hidden', 'true');
-        document.querySelector('.form-module').removeAttribute('hidden');
-    });
-
-    document.querySelector('.form-back-button').addEventListener('click', () => {
-        document.querySelector('.form-module').setAttribute('hidden', 'true');
-        document.querySelector('.form-select-module').removeAttribute('hidden');
     });
 }
 
@@ -203,5 +177,143 @@ function UpdateFormDisplay(form, request_status_code) {
             $('[data-form-results-target=' + form.attr('id') + ']').addClass('form-results-fail');
             $('[data-form-results-target=' + form.attr('id') + '] .results-fail').focus();
         }
+    }
+}
+
+
+
+function EvaluateFieldStatus(field) {
+    if (field.type !== 'file' && field.type !== 'radio') {
+        if (field.value === '') {
+            field.parentElement.getElementsByTagName('label')[0].classList.add('formatLabelIsNull');
+        }
+        else {
+            field.parentElement.getElementsByTagName('label')[0].classList.remove('formatLabelIsNull');
+            field.classList.remove('inputFailed');
+        }
+    }
+
+    if (field.type === 'tel') {
+        if (field.value !== '') {
+            if (field.value.length !== 14) {
+                field.classList.add('inputFailed');
+            }
+            else {
+                field.classList.remove('inputFailed');
+            }
+        }
+    }
+
+    if (field.type === 'email') {
+        if (field.value !== '') {
+            if (CheckEmailRegex(field.value) !== true) {
+                field.classList.add('inputFailed');
+            }
+        }
+    }
+
+    if (field.type === 'file') {
+        if (field.value !== '') {
+            if (field.files[0].size <= fileSizeLimit && ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/tiff', 'image/bmp', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/pdf'].includes(field.files[0].type)) {
+                field.classList.remove('inputError');
+                field.classList.remove('inputFailed');
+            }
+            else {
+                field.value = '';
+                field.classList.add('inputError');
+            }
+        }
+    }
+
+    if (field.type === 'radio') {
+        try {
+            document.querySelector('input[name="' + field.name + '"]:checked').value;
+            field.parentElement.parentElement.parentElement.classList.remove('inputFailed');
+        } catch (error) { }
+    }
+}
+function CheckRequiredFields() {
+    var failedCount = 0;
+    Array.from(document.getElementsByClassName('inputField')).forEach(function (element) {
+        if ((!element.classList.contains('requiredInput') && element.value !== '') || element.classList.contains('requiredInput')) {
+            if (element.type !== 'file' && element.type !== 'radio') {
+                if (element.value === '') {
+                    element.parentElement.getElementsByTagName('label')[0].classList.add('formatLabelIsNull');
+                    element.classList.add('inputFailed');
+                    failedCount += 1;
+                }
+                else {
+                    element.parentElement.getElementsByTagName('label')[0].classList.remove('formatLabelIsNull');
+                    element.classList.remove('inputFailed');
+                }
+            }
+            if (element.type === 'tel') {
+                if (element.value !== '') {
+                    if (element.value.length !== 14) {
+                        element.classList.add('inputFailed');
+                        failedCount += 1;
+                    }
+                }
+            }
+            if (element.type === 'email') {
+                if (element.value !== '') {
+                    if (CheckEmailRegex(element.value) !== true) {
+                        element.classList.add('inputFailed');
+                        failedCount += 1;
+                    }
+                }
+            }
+            if (element.type === 'file') {
+                if (element.value !== '') {
+                    if (element.files[0].size <= fileSizeLimit && ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/tiff', 'image/bmp', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/pdf'].includes(element.files[0].type)) {
+                        element.classList.remove('inputFailed');
+                    }
+                    else {
+                        element.value = '';
+                        element.classList.add('inputFailed');
+                        failedCount += 1;
+                    }
+                }
+                else {
+                    element.classList.add('inputFailed');
+                    failedCount += 1;
+                }
+            }
+            if (element.type === 'radio') {
+                try {
+                    document.querySelector('input[name="' + element.name + '"]:checked').value;
+                    element.parentElement.parentElement.parentElement.classList.remove('inputFailed');
+                } catch (error) {
+                    element.parentElement.parentElement.parentElement.classList.add('inputFailed');
+                    failedCount += 1;
+                }
+            }
+        }
+    });
+
+    return failedCount;
+}
+function CheckEmailRegex(chkEmail) {
+    if (chkEmail) {
+        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(chkEmail);
+    }
+    else {
+        return null;
+    }
+}
+function initCaptcha() {
+    grecaptcha.execute();
+    document.getElementById('btnSubmit').classList.add('btnSubmitPending');
+    document.getElementById('btnSubmitText').setAttribute('hidden', 'true');
+    document.getElementById('btnSubmitLoading').removeAttribute('hidden');
+}
+function captchaPassed() {
+    console.log('reCaptcha returned...');
+    if (grecaptcha.getResponse() !== '') {
+        console.log('reCaptcha passed!');
+        document.getElementById('applicationForm').submit();
+    }
+    else {
+        console.log('reCaptcha failed!');
     }
 }
