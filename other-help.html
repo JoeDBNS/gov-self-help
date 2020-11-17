@@ -159,9 +159,20 @@
                                 <div class="header-divider col"></div>
                             </div>
 
-                            <div class="input-set col-12 col-md-12 col-lg-12">
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" maxlength="4000"></textarea>
+                            <div class="input-set input-set-required col-12 col-md-12 col-lg-6">
+                                <label for="subject">What type of issue are you having?</label>
+                                <select name="subject" id="subject" required>
+                                    <option></option>
+                                    <option value="filing">I am having trouble filing an unemployment claim.</option>
+                                    <option value="certifying">I am having trouble certifying.</option>
+                                    <option value="payment">I have certified, but I have not received payment.</option>
+                                    <option value="other">None of these. I’m having a different issue.</option>
+                                </select>
+                            </div>
+
+                            <div class="input-set input-set-required col-12 col-md-12 col-lg-12">
+                                <label for="description">Tell us about your issue</label>
+                                <textarea name="description" id="description" maxlength="2000" required></textarea>
                             </div>
 
                             <div class="input-set col-12 col-md-12 col-lg-8">
