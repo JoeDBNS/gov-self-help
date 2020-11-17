@@ -4,7 +4,7 @@ legend {
     display: block;
     width: 100%;
     margin: 12px 0 1px 2px;
-    font-size: .85rem;
+    font-size: 1rem;
     color: #616161;
     user-select: none;
     border-radius: $radius-input;
@@ -24,17 +24,14 @@ input[type="datetime-local"] {
     background-color: $white;
     width: 100%;
     padding: 4px 0 4px 10px;
-    border: 1px solid #c1c1c1;
+    border: 1px solid;
+    border-color: #d4d4d4;
     border-radius: $radius-input;
     font-size: 1.05rem;
     transition: linear 0.1s box-shadow;
-    // box-shadow: 1px 1px 1px #e4e4e4 inset;
     &:focus {
         outline: none;
-        // box-shadow: 0 0 0 #e4e4e4 inset, 0 0 3px $brand-secondary;
-        // box-shadow: 0 0 0 #e4e4e4 inset, 0 2px 2px $brand-flair;
         box-shadow: 0 2px 2px $brand-secondary;
-        // box-shadow: 0 2px 2px $brand-flair;
     }
 }
 textarea {
