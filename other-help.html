@@ -60,27 +60,27 @@
 
                             <div class="input-set input-set-required col-12 col-md-12 col-lg-6">
                                 <label for="first_name">First Name</label>
-                                <input type="text" id="first_name" required>
+                                <input type="text" id="first_name" required data-db-field-name="first_name">
                             </div>
 
                             <div class="input-set input-set-required col-12 col-md-12 col-lg-6">
                                 <label for="last_name">Last Name</label>
-                                <input type="text" id="last_name" required>
+                                <input type="text" id="last_name" required data-db-field-name="last_name">
                             </div>
 
                             <div class="input-set col-12 col-md-12 col-lg-12">
                                 <label for="address">Mailing Address</label>
-                                <input type="text" id="address">
+                                <input type="text" id="address" data-db-field-name="address">
                             </div>
 
                             <div class="input-set col-12 col-md-6 col-lg-6">
                                 <label for="city">City</label>
-                                <input type="text" id="city">
+                                <input type="text" id="city" data-db-field-name="city">
                             </div>
 
                             <div class="input-set col-12 col-md-6 col-lg-6">
                                 <label for="state">State</label>
-                                <select name="state" id="state">
+                                <select name="state" id="state" data-db-field-name="state">
                                     <option></option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
@@ -137,19 +137,19 @@
 
                             <div class="input-set col-12 col-md-6 col-lg-6">
                                 <label for="zip">Zip Code</label>
-                                <input type="text" id="zip">
+                                <input type="text" id="zip" data-db-field-name="zip">
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-6"></div>
 
                             <div class="input-set input-set-required col-12 col-md-6 col-lg-6">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" required>
+                                <input type="text" id="phone" required data-regex-check="tel" data-db-field-name="phone">
                             </div>
 
                             <div class="input-set input-set-required col-12 col-md-12 col-lg-6">
                                 <label for="email">Email</label>
-                                <input type="text" id="email" required>
+                                <input type="text" id="email" required data-db-field-name="email">
                             </div>
                         </div>
 
@@ -161,7 +161,7 @@
 
                             <div class="input-set input-set-required col-12 col-md-12 col-lg-6">
                                 <label for="subject">What type of issue are you having?</label>
-                                <select name="subject" id="subject" required>
+                                <select name="subject" id="subject" required data-db-field-name="subject">
                                     <option></option>
                                     <option value="filing">I am having trouble filing an unemployment claim.</option>
                                     <option value="certifying">I am having trouble certifying.</option>
@@ -172,24 +172,24 @@
 
                             <div class="input-set input-set-required col-12 col-md-12 col-lg-12">
                                 <label for="description">Tell us about your issue</label>
-                                <textarea name="description" id="description" maxlength="2000" required></textarea>
+                                <textarea name="description" id="description" maxlength="4000" required data-db-field-name="description"></textarea>
                             </div>
 
                             <div class="input-set col-12 col-md-12 col-lg-8">
-                                <label for="leg_name">If you've previously contacted a legislator about this issue, please provide their name</label>
-                                <input type="text" id="leg_name">
+                                <label for="legislator_name">If you've previously contacted a legislator about this issue, please provide their name</label>
+                                <input type="text" id="legislator_name" data-db-field-name="legislator_name">
                             </div>
 
                             <div class="col-12 col-md-12 col-lg-4"></div>
 
                             <div class="input-set col-12 col-md-6 col-lg-4">
                                 <label for="claim_id">Claim ID (if known)</label>
-                                <input type="text" id="claim_id">
+                                <input type="text" id="claim_id" data-db-field-name="claim_id">
                             </div>
                         </div>
 
                         <div class="form-action row">
-                            <buttton class="btn" type="button" data-form-submit-target="form-other-support-inqueries">
+                            <buttton class="btn" type="button" tabindex="0" data-form-submit-target="form-other-support-inqueries">
                                 Submit
                             </buttton>
                         </div>

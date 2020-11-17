@@ -66,7 +66,7 @@ function InitFormListeners() {
 
 function SetupInputListeners(form_inputs) {
     Array.from(form_inputs).forEach(function(input) {
-        if (input.parentElement.classList.contains('input-set-required')) {
+        if (input.parentElement.classList.contains('input-set-required') || input.hasAttribute('data-regex-check')) {
             input.addEventListener('change', function(event) {
                 if (input.value !== '') {
                     input.parentElement.classList.remove('input-set-failed');
@@ -94,12 +94,37 @@ function SortFormFields(form_inputs) {
     let passed_inputs = [];
 
     Array.from(form_inputs).forEach(function(input) {
-        if (input.parentElement.classList.contains('input-set-required') || input.hasAttribute('data-regex-check')) {
-            if (EvaluateFormField(input)) {
-                passed_inputs.push(input);
+        if (input.parentElement.classList.contains('input-set-required')) {
+            if (input.value !== '') {
+                if (input.hasAttribute('data-regex-check')) {
+                    if (CheckFieldValueFormat(input, input.getAttribute('data-regex-check'))) {
+                        passed_inputs.push(input);
+                    }
+                    else {
+                        failed_inputs.push(input);
+                    }
+                }
+                else {
+                    passed_inputs.push(input);
+                }
             }
             else {
                 failed_inputs.push(input);
+            }
+        }
+        else {
+            if (input.hasAttribute('data-regex-check')) {
+                if (input.value !== '') {
+                    if (CheckFieldValueFormat(input, input.getAttribute('data-regex-check'))) {
+                        passed_inputs.push(input);
+                    }
+                    else {
+                        failed_inputs.push(input);
+                    }
+                }
+                else {
+                    passed_inputs.push(input);
+                }
             }
         }
     });
@@ -108,66 +133,6 @@ function SortFormFields(form_inputs) {
 }
 
 
-function EvaluateFormField(field) {
-    if (field.type !== 'file' && field.type !== 'radio') {
-        if (field.value === '') {
-            field.parentElement.getElementsByTagName('label')[0].classList.add('formatLabelIsNull');
-        }
-        else {
-            field.parentElement.getElementsByTagName('label')[0].classList.remove('formatLabelIsNull');
-            field.classList.remove('inputFailed');
-        }
-    }
-
-    if (field.type === 'tel') {
-        if (field.value !== '') {
-            if (field.value.length !== 14) {
-                field.classList.add('inputFailed');
-            }
-            else {
-                field.classList.remove('inputFailed');
-            }
-        }
-    }
-
-    if (field.type === 'email') {
-        if (field.value !== '') {
-            if (CheckEmailRegex(field.value) !== true) {
-                field.classList.add('inputFailed');
-            }
-        }
-    }
-
-    if (field.type === 'file') {
-        if (field.value !== '') {
-            if (field.files[0].size <= fileSizeLimit && ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/tiff', 'image/bmp', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/pdf'].includes(field.files[0].type)) {
-                field.classList.remove('inputError');
-                field.classList.remove('inputFailed');
-            }
-            else {
-                field.value = '';
-                field.classList.add('inputError');
-            }
-        }
-    }
-
-    if (field.type === 'radio') {
-        try {
-            document.querySelector('input[name="' + field.name + '"]:checked').value;
-            field.parentElement.parentElement.parentElement.classList.remove('inputFailed');
-        } catch (error) { }
-    }
-}
-
-
-function CheckEmailRegex(chkEmail) {
-    if (chkEmail) {
-        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(chkEmail);
-    }
-    else {
-        return null;
-    }
-}
 function CheckFieldValueFormat(field, eval_as) {
     let regex_email_check = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     let regex_phone_check = RegExp(/^.{14}$/);
@@ -239,22 +204,15 @@ function ProcessFormSubmit(form, form_submit_json_string) {
             UpdateFormDisplay(form, 'success');
 
             let response = JSON.parse(this.responseText);
-            MainVue.results = [];
-            if (response.length > 0) {
-                response.forEach(function(item) {
-                    MainVue.results.push(item);
-                });
-            }
-  
-            MainVue.pending = false;
+            console.log(response);
         }
         else {
             UpdateFormDisplay(form, 'error');
         }
     };
 
-    // request.open('POST', url);
-    // request.send()
+    request.open('POST', url);
+    request.send();
 
     UpdateFormDisplay(form, 'loading');
 }
@@ -262,165 +220,24 @@ function ProcessFormSubmit(form, form_submit_json_string) {
 
 function UpdateFormDisplay(form, request_status_code) {
     if (request_status_code === 'loading') {
-        document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.add('form-loading-show');
+        console.log('loading');
+        // document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.add('form-loading-show');
     }
     else {
-        document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
+        console.log('loading stopped');
+        // document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
 
-        form.hide();
+        // form.hide();
 
         if (request_status_code === 'success') {
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-success');
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
+            // console.log('success');
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-success');
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
         }
         else {
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-fail');
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-fail').focus();
+            // console.log('error');
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-fail');
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-fail').focus();
         }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-function EvaluateAndMarkFieldStatus(field) {
-    if (field.type !== 'file' && field.type !== 'radio') {
-        if (field.value === '') {
-            field.parentElement.getElementsByTagName('label')[0].classList.add('formatLabelIsNull');
-        }
-        else {
-            field.parentElement.getElementsByTagName('label')[0].classList.remove('formatLabelIsNull');
-            field.classList.remove('inputFailed');
-        }
-    }
-
-    if (field.type === 'tel') {
-        if (field.value !== '') {
-            if (field.value.length !== 14) {
-                field.classList.add('inputFailed');
-            }
-            else {
-                field.classList.remove('inputFailed');
-            }
-        }
-    }
-
-    if (field.type === 'email') {
-        if (field.value !== '') {
-            if (CheckEmailRegex(field.value) !== true) {
-                field.classList.add('inputFailed');
-            }
-        }
-    }
-
-    if (field.type === 'file') {
-        if (field.value !== '') {
-            if (field.files[0].size <= fileSizeLimit && ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/tiff', 'image/bmp', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/pdf'].includes(field.files[0].type)) {
-                field.classList.remove('inputError');
-                field.classList.remove('inputFailed');
-            }
-            else {
-                field.value = '';
-                field.classList.add('inputError');
-            }
-        }
-    }
-
-    if (field.type === 'radio') {
-        try {
-            document.querySelector('input[name="' + field.name + '"]:checked').value;
-            field.parentElement.parentElement.parentElement.classList.remove('inputFailed');
-        } catch (error) { }
-    }
-}
-function CheckRequiredFields() {
-    var failedCount = 0;
-    Array.from(document.getElementsByClassName('inputField')).forEach(function (element) {
-        if ((!element.classList.contains('requiredInput') && element.value !== '') || element.classList.contains('requiredInput')) {
-            if (element.type !== 'file' && element.type !== 'radio') {
-                if (element.value === '') {
-                    element.parentElement.getElementsByTagName('label')[0].classList.add('formatLabelIsNull');
-                    element.classList.add('inputFailed');
-                    failedCount += 1;
-                }
-                else {
-                    element.parentElement.getElementsByTagName('label')[0].classList.remove('formatLabelIsNull');
-                    element.classList.remove('inputFailed');
-                }
-            }
-            if (element.type === 'tel') {
-                if (element.value !== '') {
-                    if (element.value.length !== 14) {
-                        element.classList.add('inputFailed');
-                        failedCount += 1;
-                    }
-                }
-            }
-            if (element.type === 'email') {
-                if (element.value !== '') {
-                    if (CheckEmailRegex(element.value) !== true) {
-                        element.classList.add('inputFailed');
-                        failedCount += 1;
-                    }
-                }
-            }
-            if (element.type === 'file') {
-                if (element.value !== '') {
-                    if (element.files[0].size <= fileSizeLimit && ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/tiff', 'image/bmp', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/pdf'].includes(element.files[0].type)) {
-                        element.classList.remove('inputFailed');
-                    }
-                    else {
-                        element.value = '';
-                        element.classList.add('inputFailed');
-                        failedCount += 1;
-                    }
-                }
-                else {
-                    element.classList.add('inputFailed');
-                    failedCount += 1;
-                }
-            }
-            if (element.type === 'radio') {
-                try {
-                    document.querySelector('input[name="' + element.name + '"]:checked').value;
-                    element.parentElement.parentElement.parentElement.classList.remove('inputFailed');
-                } catch (error) {
-                    element.parentElement.parentElement.parentElement.classList.add('inputFailed');
-                    failedCount += 1;
-                }
-            }
-        }
-    });
-
-    return failedCount;
-}
-function CheckEmailRegex(chkEmail) {
-    if (chkEmail) {
-        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(chkEmail);
-    }
-    else {
-        return null;
-    }
-}
-function initCaptcha() {
-    grecaptcha.execute();
-    document.getElementById('btnSubmit').classList.add('btnSubmitPending');
-    document.getElementById('btnSubmitText').setAttribute('hidden', 'true');
-    document.getElementById('btnSubmitLoading').removeAttribute('hidden');
-}
-function captchaPassed() {
-    console.log('reCaptcha returned...');
-    if (grecaptcha.getResponse() !== '') {
-        console.log('reCaptcha passed!');
-        document.getElementById('applicationForm').submit();
-    }
-    else {
-        console.log('reCaptcha failed!');
     }
 }
