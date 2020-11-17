@@ -200,14 +200,14 @@ function ProcessFormSubmit(form, form_submit_json_string) {
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            UpdateFormDisplay(form, 'success');
-
-            let response = JSON.parse(this.responseText);
-            console.log(response);
-        }
-        else {
-            UpdateFormDisplay(form, 'error');
+        if (request.readyState === XMLHttpRequest.DONE) {
+            var status = request.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                UpdateFormDisplay(form, 'success');
+            }
+            else {
+                UpdateFormDisplay(form, 'error');
+            }
         }
     };
 
@@ -220,24 +220,28 @@ function ProcessFormSubmit(form, form_submit_json_string) {
 
 function UpdateFormDisplay(form, request_status_code) {
     if (request_status_code === 'loading') {
-        console.log('loading');
-        // document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.add('form-loading-show');
+        Array.from(document.querySelectorAll('[data-hide-on-submit]')).forEach(function(element) {
+            element.setAttribute('hidden', 'true');
+        });
+
+        document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.add('form-loading-show');
     }
     else {
-        console.log('loading stopped');
-        // document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
-
-        // form.hide();
+        document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
 
         if (request_status_code === 'success') {
-            // console.log('success');
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-success');
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
+            form.setAttribute('hidden', 'true');
+
+            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-show');
+            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
         }
         else {
-            // console.log('error');
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-fail');
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-fail').focus();
+            Array.from(document.querySelectorAll('[data-hide-on-submit]')).forEach(function(element) {
+                element.removeAttribute('hidden');
+            });
+
+            console.error('There was an error in processing your request. Please try again later.');
+            alert('There was an error in processing your request. Please try again later.')
         }
     }
 }

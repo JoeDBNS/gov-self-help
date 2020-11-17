@@ -1,9 +1,10 @@
 .form-module {
     form {
-        margin: 40px auto 70px auto;
+        margin: 0 auto 70px auto;
 	    font-family: sans-serif, monospace;
 
         .form-header {
+            margin-top: 40px;
             margin-bottom: 24px;
             text-align: center;
             font-size: 2.5rem;
@@ -49,6 +50,56 @@
 
         .form-action {
             margin-top: 80px;
+
+            .form-spinner {
+                color: $brand;
+                pointer-events: none;
+                display: inline-block;
+                position: relative;
+                top: .75rem;
+                left: -3rem;
+                opacity: 0;
+                transition: linear .1s all;
+            }
+
+            .form-loading-show {
+                left: .25rem;
+                opacity: 1;
+            }
         }
+    }
+
+    .form-results {
+        display: none;
+        margin: 40px auto 70px auto;
+        font-family: sans-serif, monospace;
+
+        .results-page {
+            .page-header {
+                margin-bottom: 24px;
+                text-align: center;
+                font-size: 2.5rem;
+                color: #3f6f8a;
+            }
+    
+            .page-subtext {
+                margin: 38px 0;
+                font-size: 1.05rem;
+            }
+
+            .page-address {
+                margin-top: 90px;
+                font-size: 1.05rem;
+
+                b {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .form-results-show {
+        display: inline-block;
     }
 }

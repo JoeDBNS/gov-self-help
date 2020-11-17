@@ -27,15 +27,16 @@
     </header>
 
     <main id="app-main" class="container-fluid">
-        <div class="row justify-content-center">
-            <div style="overflow: hidden; border-radius: 0px 0px 10px 10px;">
-                <img src="./static/img/GovernorWhitmer_banner.png" alt="Website banner of Governor Whitmer standing in front of the Mackinac Bridge" style="width: 100%; max-width: 1005px;">
-            </div>
-        </div>
 
         <div class="row justify-content-center">
             <section class="form-module col-12 col-lg-8 col-xl-9">
                 <form class="container-fluid col-12 col-sm-10 col-md-8 col-lg-10" id="form-other-support-inqueries">
+                    <div class="row justify-content-center">
+                        <div style="overflow: hidden; border-radius: 0px 0px 10px 10px;">
+                            <img src="./static/img/GovernorWhitmer_banner.png" alt="Website banner of Governor Whitmer standing in front of the Mackinac Bridge" style="width: 100%; max-width: 1005px;">
+                        </div>
+                    </div>
+
                     <div class="form-page">
                         <h1 class="form-header">
                             Unemployment Assistance Request
@@ -188,13 +189,153 @@
                             </div>
                         </div>
 
-                        <div class="form-action row">
-                            <buttton class="btn" type="button" tabindex="0" data-form-submit-target="form-other-support-inqueries">
+                        <div class="form-action row justify-content-center">
+                            <buttton class="btn" type="button" tabindex="0" data-form-submit-target="form-other-support-inqueries" data-hide-on-submit>
                                 Submit
                             </buttton>
+
+                            <div class="form-spinner" data-form-loading-target="form-other-support-inqueries">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
+
+                <div class="form-results container-fluid col-12 col-sm-10 col-md-8 col-lg-10" data-form-results-target="form-other-support-inqueries">
+                    <div class="results-page results-success container-fluid">
+                        <div class="row justify-content-center my-5">
+                            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                            <svg
+                                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                xmlns:cc="http://creativecommons.org/ns#"
+                                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                xmlns:svg="http://www.w3.org/2000/svg"
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                id="svg2"
+                                height="100"
+                                width="100">
+                                <metadata
+                                    id="metadata23">
+                                    <rdf:RDF>
+                                    <cc:Work
+                                        rdf:about="">
+                                        <dc:format>image/svg+xml</dc:format>
+                                        <dc:type
+                                        rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                                        <dc:title></dc:title>
+                                    </cc:Work>
+                                    </rdf:RDF>
+                                </metadata>
+                                <defs
+                                    id="defs21" />
+                                <g
+                                    style="fill:none"
+                                    id="g4">
+                                    <title
+                                        id="title6">background</title>
+                                    <rect
+                                        style="fill:none"
+                                        x="-1"
+                                        y="-1"
+                                        width="102"
+                                        height="102"
+                                        id="canvas_background"
+                                        fill="#fff" />
+                                    <g
+                                        style="fill:none"
+                                        id="canvasGrid"
+                                        width="100%"
+                                        height="100%"
+                                        x="0"
+                                        y="0"
+                                        overflow="visible"
+                                        display="none">
+                                    <rect
+                                        style="fill:none"
+                                        id="rect10"
+                                        width="100%"
+                                        height="100%"
+                                        x="0"
+                                        y="0"
+                                        stroke-width="0"
+                                        fill="url(#gridpattern)" />
+                                    </g>
+                                </g>
+                                <g
+                                    style="fill:none"
+                                    id="g12">
+                                    <title
+                                        id="title14">Layer 1</title>
+                                    <ellipse
+                                        style="fill:none;stroke:#3fa847;stroke-opacity:1"
+                                        fill="#fff"
+                                        stroke-width="3.5"
+                                        cx="50.128205"
+                                        cy="50.015488"
+                                        id="svg_1"
+                                        rx="47.974357"
+                                        ry="48.030313"
+                                        stroke="#000" />
+                                    <line
+                                        transform="rotate(2.7238028049468994 28.269227981567305,60.51081466674801) "
+                                        fill="none"
+                                        stroke="#000"
+                                        stroke-width="3.5"
+                                        style="fill:none;stroke-linecap:round;stroke:#3fa847;stroke-opacity:1"
+                                        stroke-opacity="null"
+                                        fill-opacity="null"
+                                        x1="19.182824"
+                                        y1="48.558304"
+                                        x2="37.355635"
+                                        y2="72.463328"
+                                        id="svg_3"
+                                        stroke-linejoin="null"
+                                        stroke-linecap="null" />
+                                    <line
+                                        style="fill:none;stroke:#3fa847;stroke-width:3.73036098;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                                        stroke-opacity="null"
+                                        fill-opacity="null"
+                                        x1="36.768421"
+                                        y1="72.760696"
+                                        x2="80.271339"
+                                        y2="38.153568"
+                                        id="svg_4"
+                                        stroke-linejoin="null" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <h2 class="page-header">
+                            Your Request Has Been Successfully Submitted
+                        </h2>
+
+                        <br>
+
+                        <p class="page-subtext text-center">Thank you for submitting your request to the Executive Office of the Governor. This message is to confirm that your request has been submitted and will soon be reviewed for whatever action may be appropriate.</p>
+                        <p class="page-subtext text-center">A member of staff will be in touch in the near future. Meanwhile. please do not hesitate to let this office know if there is anything else we can be doing for you.</p>
+
+                        <div class="page-address text-center">
+                            <p><b>Executive Office of the Governor, Gretchen Whitmer</b></p>
+                            <p>PO Box 30013</p>
+                            <p>Lansing, MI 48909</p>
+                            <p>517-335-7858</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-results" hidden>
+                    <div class="results-success">
+                        <p><b>Thank you, your information has been submitted.</b></p>
+                        <p>Return to <a href="https://www.michigan.gov/uia/">Unemployment Insurance Agency Home page</a>.</p>
+                    </div>
+
+                    <div class="results-fail">
+                        <p><b>There was an error in processing your request. Please try again later.</b></p>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
