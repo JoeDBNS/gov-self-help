@@ -2,7 +2,7 @@
 
 // OnLoad Run
 window.addEventListener('load', function() {
-    switch (window.location.pathname.replace('/gov-self-help', '').toLowerCase()) {
+    switch (window.location.pathname.toLowerCase().replace('/gov-self-help', '')) {
         case '/':
         case '/index.html':
             InitSelfHelpMenu();
