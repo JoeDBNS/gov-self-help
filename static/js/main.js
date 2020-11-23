@@ -240,7 +240,7 @@ function BuildFormSubmitJson(form_inputs) {
 
 function ReplaceBadUrlParamCharacters(fix_string) {
     let bad_chars = ['&', '#'];
-    let char_rep_with = ['and', ''];
+    let char_rep_with = ['and', '_pound_'];
 
     bad_chars.forEach((char, index) => {
         var char_all = new RegExp(char, 'g');
