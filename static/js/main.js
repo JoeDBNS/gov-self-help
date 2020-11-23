@@ -274,10 +274,12 @@ function UpdateFormDisplay(form, request_status_code) {
         document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
 
         if (request_status_code === 'success') {
-            form.setAttribute('hidden', 'true');
+            window.location.replace("https://www.michigan.gov/whitmer");
 
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-show');
-            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
+            // form.setAttribute('hidden', 'true');
+
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-show');
+            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
         }
         if (request_status_code === 'error') {
             Array.from(document.querySelectorAll('[data-hide-on-submit]')).forEach(function(element) {
@@ -285,7 +287,7 @@ function UpdateFormDisplay(form, request_status_code) {
             });
 
             console.error('There was an error in processing your request. Please try again later.');
-            alert('There was an error in processing your request. Please try again later.')
+            alert('There was an error in processing your request. Please try again later.');
         }
         if (request_status_code === 'max_submission') {
             form.setAttribute('hidden', 'true');
