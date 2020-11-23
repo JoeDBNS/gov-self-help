@@ -231,11 +231,23 @@ function BuildFormSubmitJson(form_inputs) {
             form_value_json[input.getAttribute('data-db-field-name')] = input.checked;
         }
         else {
-            form_value_json[input.getAttribute('data-db-field-name')] = input.value;
+            form_value_json[input.getAttribute('data-db-field-name')] = ReplaceBadUrlParamCharacters(input.value);
         }
     });
 
     return JSON.stringify(form_value_json);
+}
+
+function ReplaceBadUrlParamCharacters(fix_string) {
+    let bad_chars = ['&', '#'];
+    let char_rep_with = ['and', ''];
+
+    bad_chars.forEach((char, index) => {
+        var char_all = new RegExp(char, 'g');
+        fix_string = fix_string.replace(char_all, char_rep_with[index]);
+    });
+
+    return fix_string;
 }
 
 function ProcessFormSubmit(form, form_submit_json_string) {
