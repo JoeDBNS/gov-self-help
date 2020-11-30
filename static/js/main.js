@@ -286,12 +286,10 @@ function UpdateFormDisplay(form, request_status_code) {
         document.querySelector('[data-form-loading-target=' + form.getAttribute('id') + ']').classList.remove('form-loading-show');
 
         if (request_status_code === 'success') {
-            window.location.replace("https://www.michigan.gov/whitmer");
+            form.setAttribute('hidden', 'true');
 
-            // form.setAttribute('hidden', 'true');
-
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-show');
-            // document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
+            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + ']').classList.add('form-results-show');
+            document.querySelector('[data-form-results-target=' + form.getAttribute('id') + '] .results-success').focus();
         }
         if (request_status_code === 'error') {
             Array.from(document.querySelectorAll('[data-hide-on-submit]')).forEach(function(element) {
